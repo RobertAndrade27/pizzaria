@@ -31,11 +31,10 @@ pizzaJson.map ((item, index)=>{
             if (sizeIndex == 2){
                 size.classList.add('selected');
             }
-         
             size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
         });
-
         
+                
         c('.pizzaInfo--qt').innerHTML = modalQt;
 
         c('.pizzaWindowArea').style.opacity = 0;
@@ -46,6 +45,9 @@ pizzaJson.map ((item, index)=>{
        
        
     });
+
+    // let valoresPizza = document.getElementById("za")
+    //     dump(d.innerHTML);
 
     c('.pizza-area').append( pizzaItem );
 });
@@ -110,8 +112,16 @@ function updateCart(){
 
         c('.cart').innerHTML = '';
 
+        let subtotal = 0;
+        let entrega = 0;
+        let total = 0;
+
         for(let i in cart) {
             let pizzaItem = pizzaJson.find((item)=> item.id == cart [i].id);
+
+            subtotal +=pizzaItem.price * cart[i].qt;
+
+
             let cartItem = c('.models .cart--item').cloneNode(true);
 
             let pizzaSizeName;
@@ -150,9 +160,27 @@ function updateCart(){
         
          
         };
+               
+        if (subtotal >= 50){
+            entrega = 0;
+        } else {
+            entrega = 3.99;
+        };
+        
+        // Para pedidos acima de R$50 a entrega é gratis
+        total = subtotal + entrega;        
+       
+
+        c('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
+        c('.entrega span:last-child').innerHTML = `R$ ${entrega.toFixed(2)}`;
+        c('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
+
 
    } else {
         c('aside').classList.remove('show');
     }
 }
+
+href="https://web.whatsapp.com/send?phone=5516997774016&text=Ol%C3%A1+NOMECLIENTE+seu+pedido+de+PIZZA+n+15281+est%C3%A1+em+andamento%21action-button%3FIniciar+convers%3Faaction-button%3send"
+
 
